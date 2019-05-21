@@ -23,6 +23,8 @@ module.exports = appInfo => {
     host: '127.0.0.1',
     port: 3306,
     database: 'ela',
+    username: 'root',
+    password: '123456789'
   }
 
   // add your user config here

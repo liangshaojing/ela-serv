@@ -24,7 +24,8 @@ module.exports = appInfo => {
     port: 3306,
     database: 'ela',
     username: 'root',
-    password: '123456789'
+    password: '123456789',
+    timezone: '+08:00'
   }
 
   // add your user config here

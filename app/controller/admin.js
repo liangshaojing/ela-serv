@@ -2,13 +2,25 @@
 
 const Controller = require('egg').Controller;
 
+const formatData = data => {
+  const vaildKeys = [ 'admin_id', 'username', 'avatar_url', 'is_super_admin' ];
+
+  const newData = Object.create(null);
+  for (const [ key, val ] of Object.entries(data.dataValues)) {
+    if (vaildKeys.includes(key)) {
+      newData[key] = val;
+    }
+  }
+  return newData;
+};
+
 class AdminController extends Controller {
   async register() {
     const { ctx } = this;
 
     const { username, password } = ctx.request.body;
     if (!username || !password) {
-      return ctx.failure(400, 'Invalid parameter')
+      return ctx.failure(400, 'Invalid parameter');
     }
 
     const admin = await ctx.service.admin.register(username, password);
@@ -20,7 +32,7 @@ class AdminController extends Controller {
 
     const { username, password } = ctx.request.body;
     if (!username || !password) {
-      return ctx.failure(400, 'Invalid parameter')
+      return ctx.failure(400, 'Invalid parameter');
     }
 
     const admin = await ctx.service.admin.login(username, password);
@@ -28,18 +40,6 @@ class AdminController extends Controller {
     ctx.session.isSuperAdmin = admin.is_super_admin === 1;
     ctx.success(200, formatData(admin));
   }
-}
-
-const formatData = data => {
-  const vaildKeys = ['admin_id', 'username', 'avatar_url', 'is_super_admin'];
-
-  const newData = Object.create(null);
-  for (const [ key, val ] of Object.entries(data.dataValues)) {
-    if (vaildKeys.includes(key)) {
-      newData[key] = val;
-    }
-  }
-  return newData;
 }
 
 module.exports = AdminController;

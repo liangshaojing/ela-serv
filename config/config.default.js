@@ -25,26 +25,26 @@ module.exports = appInfo => {
     database: 'ela',
     username: 'root',
     password: '123456789',
-    timezone: '+08:00'
+    timezone: '+08:00',
   };
 
   // 关闭安全威胁csrf的防范
   config.security = {
     csrf: {
       ignore: ctx => {
-        let ipReg = /^(172\.17|127\.0)/;
-        return ipReg.test(ctx.ip)
-      }
-    }
-  }
+        const ipReg = /^(172\.17|127\.0)/;
+        return ipReg.test(ctx.ip);
+      },
+    },
+  };
 
   config.security = {
     csrf: {
       enable: false,
-      ignoreJSON: true
+      ignoreJSON: true,
     },
-    domainWhiteList: ['http://localhost:7001', 'http://127.0.0.1:7001']
-  }
+    domainWhiteList: [ 'http://localhost:7001', 'http://127.0.0.1:7001' ],
+  };
 
   // add your user config here
   const userConfig = {

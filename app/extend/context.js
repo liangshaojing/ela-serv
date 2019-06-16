@@ -1,14 +1,16 @@
-module.exports = {
-    success(status, data) {
-        this.status = status;
-        this.body = {
-            success: true,
-            data
-        }
-    },
+'use strict';
 
-    failure(status, msg) {
-        this.status = status;
-        this.message = msg;
-    }
-}
+module.exports = {
+  success(status, data) {
+    this.status = status;
+    this.body = {
+      success: true,
+      data,
+    };
+  },
+
+  failure(status, msg) {
+    this.status = status;
+    this.message = msg;
+  },
+};

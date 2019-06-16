@@ -9,7 +9,7 @@ class AdminService extends Service {
     const { ctx } = this;
 
     const admin = await ctx.model.Admin.findOne({
-      where: { username }
+      where: { username },
     });
     if (admin) {
       return ctx.failure(400, 'User name already registered');
@@ -19,8 +19,8 @@ class AdminService extends Service {
     const data = {
       admin_id: uuid.v4().replace(/-/g, ''),
       username,
-      password: hash
-    }
+      password: hash,
+    };
     const adminInfo = await ctx.model.Admin.create(data);
     return adminInfo;
   }
@@ -30,7 +30,7 @@ class AdminService extends Service {
     const { ctx } = this;
 
     const admin = await ctx.model.Admin.findOne({
-      where: { username }
+      where: { username },
     });
 
     if (!admin) {
